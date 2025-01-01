@@ -63,12 +63,12 @@ defineProps({
 <style scoped>
 .broker-group {
   position: absolute;
-  border: 2px solid #ff9800;
+  border: none;
   border-radius: 8px;
-  padding: 15px;
-  background: rgba(255, 248, 225, 0.5);
+  padding: 8px;
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.1), rgba(255, 193, 7, 0.2));
   z-index: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px rgba(255, 152, 0, 0.15);
 }
 
 .component {
@@ -84,61 +84,69 @@ defineProps({
 }
 
 .broker {
-  background: #fff8e1;
-  border-color: #ff9800;
+  background: linear-gradient(135deg, #FF9800, #F57C00);
+  border: none;
+  border-radius: 6px;
   position: relative;
-  margin: 10px 0;
-  left: auto;
-  top: auto;
-  transform: none;
-  width: 100%;
-  padding: 12px 15px;
+  margin: 0;
+  padding: 6px 8px;
+  color: white;
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.2);
+}
+
+.broker-header {
+  font-size: 12px;
+  margin-bottom: 4px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
 }
 
 .message-queue {
   display: flex;
   flex-direction: row;
-  gap: 2px;
-  margin: 8px 0 0 0;
-  min-height: 30px;
-  background: #fff;
-  border: 1px solid #ddd;
+  gap: 1px;
+  min-height: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
   border-radius: 4px;
-  padding: 6px;
+  padding: 4px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .queue-slot {
-  width: 40px;
-  height: 25px;
-  border: 1px dashed #ccc;
+  width: 20px;
+  height: 16px;
+  border: 1px dashed rgba(255, 152, 0, 0.3);
   border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 10px;
   color: #666;
   position: relative;
   background: white;
-  margin: 0 1px;
+  transition: all 0.3s ease;
 }
 
 .queue-slot.filled {
-  width: 40px;
-  height: 25px;
-  background: #e3f2fd;
+  width: 20px;
+  height: 16px;
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+  border: none;
   border-radius: 3px;
-  color: #1976d2;
-  transition: opacity 0.3s ease;
+  color: white;
+  box-shadow: 0 1px 3px rgba(33, 150, 243, 0.3);
 }
 
 .queue-slot.next-to-consume::after {
   content: "↑";
   position: absolute;
-  bottom: -20px;
+  bottom: -12px;
   left: 50%;
   transform: translateX(-50%);
-  color: #2196f3;
-  font-size: 16px;
+  color: #1976D2;
+  font-size: 12px;
   font-weight: bold;
+  text-shadow: 0 1px 2px rgba(25, 118, 210, 0.2);
 }
 </style> 

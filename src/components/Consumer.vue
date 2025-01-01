@@ -49,14 +49,21 @@ defineProps({
 <style scoped>
 .component {
   position: absolute;
-  padding: 12px 20px;
-  background: white;
-  border: 2px solid #3498db;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+  border: none;
   border-radius: 6px;
   text-align: center;
   font-size: 14px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: white;
+  box-shadow: 0 2px 8px rgba(156, 39, 176, 0.3);
   z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.component:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(156, 39, 176, 0.4);
 }
 
 .consumer {
@@ -67,36 +74,33 @@ defineProps({
 .message-queue {
   display: flex;
   flex-direction: row;
-  gap: 4px;
-  margin: 10px 0;
-  min-height: 30px;
-  background: #fff;
-  border: 1px solid #ddd;
+  gap: 2px;
+  margin-top: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
   border-radius: 4px;
-  padding: 8px;
+  padding: 4px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .queue-slot {
-  width: 40px;
-  height: 25px;
-  border: 1px dashed #ccc;
+  width: 20px;
+  height: 16px;
+  border: 1px dashed rgba(156, 39, 176, 0.3);
   border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 10px;
   color: #666;
-  position: relative;
   background: white;
-  margin: 0 1px;
+  transition: all 0.3s ease;
 }
 
 .queue-slot.filled {
-  width: 40px;
-  height: 25px;
-  background: #e3f2fd;
-  border-radius: 3px;
-  color: #1976d2;
-  transition: opacity 0.3s ease;
+  background: linear-gradient(135deg, #E91E63, #C2185B);
+  border: none;
+  color: white;
+  box-shadow: 0 1px 3px rgba(233, 30, 99, 0.3);
 }
 </style> 

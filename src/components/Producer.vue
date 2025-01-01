@@ -23,14 +23,21 @@ defineProps({
 <style scoped>
 .component {
   position: absolute;
-  padding: 12px 20px;
-  background: white;
-  border: 2px solid #3498db;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  border: none;
   border-radius: 6px;
   text-align: center;
   font-size: 14px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: white;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
   z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.component:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
 }
 
 .producer {
