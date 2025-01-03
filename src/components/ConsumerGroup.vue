@@ -1,43 +1,44 @@
 <template>
   <div 
-    class="broker-group"
+    class="consumer-group"
     :style="{ 
-      left: 'calc(20% + 20px)', 
+      right: '20px', 
       top: '80px',
-      width: 'calc(50%)',
+      width: 'calc(25% - 40px)',
       height: 'calc(100% - 160px)'
     }"
   >
-    <Broker
-      v-for="broker in brokers" 
-      :key="broker.id"
-      :broker="broker"
+    <Consumer 
+      v-for="consumer in consumers" 
+      :key="consumer.id" 
+      :consumer="consumer"
+      :duration="duration"
     />
   </div>
 </template>
 
 <script setup>
-import Broker from './Broker.vue'
+import Consumer from './Consumer.vue'
 
 defineProps({
-  brokers: {
+  consumers: {
     type: Array,
     required: true
   },
-  brokerSection: {
+  duration: {
     type: Number,
-    required: true
+    default: 2000
   }
 })
 </script>
 
 <style scoped>
-.broker-group {
+.consumer-group {
   position: absolute;
-  border: 2px dashed #81C784;
+  border: 2px dashed #FFB74D;
   border-radius: 8px;
   padding: 10px;
-  background: rgba(232, 245, 233, 0.1);
+  background: rgba(255, 243, 224, 0.1);
   z-index: 0;
   display: flex;
   align-items: center;

@@ -16,48 +16,51 @@
     </div>
 
     <div class="visualization" id="pulsar-viz">
-      <!-- 虚线 -->
-      <div class="dashed-line" style="left: calc(15% + 40px)"></div>
-      <div class="dashed-line" style="left: calc(70% + 40px)"></div>
-
       <!-- Producer -->
-      <Producer 
-        v-for="producer in components.producers"
-        :key="producer.id"
-        :producer="producer"
-      />
+      <ProducerGroup :producers="components.producers" />
 
       <!-- Broker -->
       <BrokerGroup 
         :brokers="components.brokers"
         :brokerSection="brokerSection"
-        :currentConsumeIndex="currentConsumeIndex"
       />
 
       <!-- Consumer -->
-      <Consumer 
-        v-for="consumer in components.consumers"
-        :key="consumer.id"
-        :consumer="consumer"
-        :consumerSection="consumerSection"
+      <ConsumerGroup 
+        :consumers="components.consumers" 
+        :duration="config.animationSpeed"
       />
 
       <!-- 动画中的消息 -->
       <AnimatingMessage 
         v-for="msg in animatingMessages"
         :key="msg.id"
-        :message="msg"
-        :animationSpeed="config.animationSpeed"
+        :id="msg.id"
+        :x="msg.x"
+        :y="msg.y"
+        :content="msg.content"
+        :duration="config.animationSpeed"
+        :onAnimationEnd="msg.onAnimationEnd"
+      />
+
+      <AnimatingAck
+        v-for="ack in animatingAcks"
+        :key="ack.id"
+        :x="ack.x"
+        :y="ack.y"
+        :duration="config.animationSpeed"
+        :messageId="ack.messageId"
       />
     </div>
   </div>
 </template>
 
 <script setup>
-import Producer from './Producer.vue'
+import ProducerGroup from './ProducerGroup.vue'
 import BrokerGroup from './BrokerGroup.vue'
-import Consumer from './Consumer.vue'
+import ConsumerGroup from './ConsumerGroup.vue'
 import AnimatingMessage from './AnimatingMessage.vue'
+import AnimatingAck from './AnimatingAck.vue'
 
 defineProps({
   config: {
@@ -76,15 +79,11 @@ defineProps({
     type: Array,
     required: true
   },
-  currentConsumeIndex: {
-    type: Number,
+  animatingAcks: {
+    type: Array,
     required: true
   },
   brokerSection: {
-    type: Number,
-    required: true
-  },
-  consumerSection: {
     type: Number,
     required: true
   }
@@ -104,7 +103,6 @@ defineEmits(['toggle-simulation', 'reset-simulation', 'set-speed'])
 }
 
 .visualization {
-  /* width: 100%; */
   height: 500px;
   border: 1px solid #ddd;
   position: relative;
@@ -137,15 +135,6 @@ h1 {
 .speed-control label {
   font-size: 14px;
   color: #666;
-}
-
-.dashed-line {
-  position: absolute;
-  width: 2px;
-  height: 100%;
-  border-right: 2px dashed #ddd;
-  z-index: 0;
-  top: 0;
 }
 
 button {

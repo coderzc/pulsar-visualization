@@ -1,43 +1,39 @@
 <template>
   <div 
-    class="broker-group"
+    class="producer-group"
     :style="{ 
-      left: 'calc(20% + 20px)', 
+      left: '20px', 
       top: '80px',
-      width: 'calc(50%)',
+      width: 'calc(20% - 40px)',
       height: 'calc(100% - 160px)'
     }"
   >
-    <Broker
-      v-for="broker in brokers" 
-      :key="broker.id"
-      :broker="broker"
+    <Producer
+      v-for="producer in producers" 
+      :key="producer.id"
+      :producer="producer"
     />
   </div>
 </template>
 
 <script setup>
-import Broker from './Broker.vue'
+import Producer from './Producer.vue'
 
 defineProps({
-  brokers: {
+  producers: {
     type: Array,
-    required: true
-  },
-  brokerSection: {
-    type: Number,
     required: true
   }
 })
 </script>
 
 <style scoped>
-.broker-group {
+.producer-group {
   position: absolute;
-  border: 2px dashed #81C784;
+  border: 2px dashed #64B5F6;
   border-radius: 8px;
   padding: 10px;
-  background: rgba(232, 245, 233, 0.1);
+  background: rgba(227, 242, 253, 0.1);
   z-index: 0;
   display: flex;
   align-items: center;

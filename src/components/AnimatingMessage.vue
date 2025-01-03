@@ -2,57 +2,70 @@
   <div 
     class="message"
     :class="{ 
-      animating: message.animating,
-      'fade-out': message.fadeOut
+      'acknowledged': acknowledged
     }"
-    :style="{ 
-      left: message.x + 'px', 
-      top: message.y + 'px',
-      '--animation-duration': animationSpeed + 'ms'
+    :style="{
+      left: `${x}px`,
+      top: `${y}px`,
+      opacity: `${opacity}`
     }"
-  >
-    M{{ message.content }}
-  </div>
+  >M{{ content }}</div>
 </template>
 
 <script setup>
-defineProps({
-  message: {
-    type: Object,
+const props = defineProps({
+  id: {
+    type: String,
     required: true
   },
-  animationSpeed: {
+  x: {
     type: Number,
     required: true
+  },
+  y: {
+    type: Number,
+    required: true
+  },
+  content: {
+    type: Number,
+    required: true
+  },
+  duration: {
+    type: Number,
+    default: 1000
+  },
+  opacity: {
+    type: Number,
+    default: 1
+  },
+  acknowledged: {
+    type: Boolean,
+    default: false
   }
 })
+
 </script>
 
 <style scoped>
 .message {
   position: absolute;
-  width: 40px;
-  height: 25px;
-  background: #e3f2fd;
-  border: 1px solid #2196f3;
+  width: 32px;
+  height: 24px;
+  background: #FFF3E0;
+  border: 1px solid #FFE0B2;
   border-radius: 3px;
-  color: #1976d2;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  z-index: 2;
-  opacity: 1;
-  transition: all var(--animation-duration) ease;
+  color: #E65100;
+  z-index: 1;
 }
 
-.message.fade-out {
-  opacity: 0;
-  transform: translateY(-20px);
-}
-
-.message.animating {
-  transition: all var(--animation-duration) ease;
+.message.acknowledged {
+  background: #9E9E9E;
+  border-color: #757575;
+  color: white;
+  opacity: 0.7;
 }
 </style> 

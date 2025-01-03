@@ -9,7 +9,7 @@
       :state="state"
       :components="components"
       :animatingMessages="animatingMessages"
-      :currentConsumeIndex="currentConsumeIndex"
+      :animatingAcks="animatingAcks"
       :brokerSection="brokerSection"
       :consumerSection="consumerSection"
       @toggle-simulation="toggleSimulation"
@@ -29,7 +29,7 @@ import { useMessageSimulation } from './composables/useMessageSimulation'
 const config = reactive({
   produceInterval: 1000,
   processInterval: 2000,
-  animationSpeed: 1000,
+  animationSpeed: 2000,
   totalWidth: 1200
 })
 
@@ -37,7 +37,7 @@ const {
   state,
   components,
   animatingMessages,
-  currentConsumeIndex,
+  animatingAcks,
   brokerSection,
   consumerSection,
   toggleSimulation,
