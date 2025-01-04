@@ -5,6 +5,7 @@
       @apply-config="applyConfig"
     />
     <VisualizationPanel 
+      v-if="isPanelMounted"
       :config="config"
       :state="state"
       :components="components"
@@ -13,7 +14,7 @@
       :brokerSection="brokerSection"
       :consumerSection="consumerSection"
       @toggle-simulation="toggleSimulation"
-      @reset-simulation="resetSimulation"
+      @reset-simulation="handleReset"
       @set-speed="setSpeed"
     />
   </div>
@@ -33,6 +34,8 @@ const config = reactive({
   totalWidth: 1200
 })
 
+const isPanelMounted = ref(true)
+
 const {
   state,
   components,
@@ -45,6 +48,19 @@ const {
   setSpeed,
   applyConfig
 } = useMessageSimulation(config)
+
+function handleReset() {
+  // 先卸载可视化面板
+  isPanelMounted.value = false
+  
+  // 执行重置
+  resetSimulation()
+  
+  // 在下一个事件循环中重新挂载面板
+  setTimeout(() => {
+    isPanelMounted.value = true
+  }, 0)
+}
 </script>
 
 <style>

@@ -5,10 +5,12 @@
       width: 'calc(100% - 10px)',
       overflow: 'hidden'
     }">
-      <div class="queue-container" :style="{
-        transform: `translateX(${-36 * moveOffset}px)`,
-        transition: moveOffset > 0 ? `transform var(--fade-duration) ease` : 'none'
-      }">
+      <div class="queue-container" 
+        :key="resetKey"
+        :style="{
+          transform: `translateX(${-36 * moveOffset}px)`,
+          transition: moveOffset > 0 ? `transform var(--fade-duration) ease` : 'none'
+        }">
         <div v-for="(msg, index) in consumer.queue" :key="index" class="queue-slot" :id="consumer.id + '-slot-' + index"
           :class="{ 
             'filled': msg != null && msg.show,
@@ -44,6 +46,7 @@ const props = defineProps({
 })
 
 const moveOffset = ref(0)
+const resetKey = ref(0)
 
 // 监听队列长度变化
 watch(() => props.consumer.queue.length, (newLen, oldLen) => {
@@ -58,6 +61,8 @@ watch(() => props.consumer.queue, (newQueue) => {
   // 如果队列全是 null，说明是重置操作
   if (newQueue.every(item => item === null)) {
     moveOffset.value = 0
+    // 强制重新渲染容器
+    resetKey.value++
   }
 }, { deep: true })
 
@@ -131,7 +136,7 @@ function onTransitionEnd(msg) {
 
 .queue-slot.fade-out {
   opacity: 0;
-  transform: translateX(-20px);
+  transform: translateY(-20px);
   transition: opacity var(--fade-duration) ease, transform var(--fade-duration) ease;
 }
 

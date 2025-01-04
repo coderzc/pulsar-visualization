@@ -228,7 +228,7 @@ export function useMessageSimulation(config) {
             consumer.queue.push(null)
             consumer.queue.shift()
             state.isProcessing = false
-        }, config.animationSpeed +200)
+        }, config.animationSpeed + 200)
         
         const vizRect = document.getElementById('pulsar-viz').getBoundingClientRect()
         const consumerSlot = document.getElementById(`${consumer.id}-slot-${messageIndex}`)
@@ -304,7 +304,10 @@ export function useMessageSimulation(config) {
     }
 
     function resetSimulation() {
+        // 先暂停所有定时器
         pauseSimulation()
+
+        // 重置所有状态
         state.messageCount = 0
         state.consumeCount = 0
         state.isProcessing = false
@@ -320,14 +323,34 @@ export function useMessageSimulation(config) {
         })
         
         components.brokers.forEach(broker => {
+            // 先重置所有消息状态
+            broker.queue = broker.queue.map(() => ({
+                id: null,
+                show: false,
+                acknowledged: false
+            }))
             broker.readIndex = 0
-            broker.queue = Array(broker.queue.length).fill(null)
+            // 然后立即清空队列
+            setTimeout(() => {
+                broker.queue = Array(broker.queue.length).fill(null)
+            }, 0)
         })
         
         components.consumers.forEach(consumer => {
-            consumer.queue = Array(consumer.queue.length).fill(null)
+            // 先重置所有消息状态
+            consumer.queue = consumer.queue.map(() => ({
+                id: null,
+                show: false,
+                fadeOut: false,
+                resetPosition: false
+            }))
+            // 然后立即清空队列
+            setTimeout(() => {
+                consumer.queue = Array(consumer.queue.length).fill(null)
+            }, 0)
         })
 
+        // 重置计数器和时间
         messageId = 0
         lastProcessTime = 0
     }
