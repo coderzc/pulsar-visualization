@@ -1,5 +1,8 @@
 # Pulsar 消息可视化工具
 
+<img width="1834" alt="image" src="https://github.com/user-attachments/assets/7e3aa6d5-44cc-4877-90fa-6a1b5b0a25ed" />
+
+
 ## 功能
 
 - [x] 模拟消息的生产和消费
