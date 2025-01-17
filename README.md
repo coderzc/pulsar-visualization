@@ -17,4 +17,4 @@
 1. 下载代码
 2. 运行 `npm install`
 3. 运行 `npm run dev`
-4. 打开 `http://localhost:5173` 查看效果
+4. 打开 `http://localhost:3000` 查看效果
